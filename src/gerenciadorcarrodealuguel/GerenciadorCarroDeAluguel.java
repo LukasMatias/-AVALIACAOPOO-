@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class GerenciadorCarroDeAluguel {
 
     private static Operacao op = new Operacao();
+    
 
     public static void main(String[] args) {
         boolean sair = false;
@@ -30,7 +31,7 @@ public class GerenciadorCarroDeAluguel {
                     op.venda();
                     break;
                 case 3:
-                    retirarCarro();
+                    op.listarCarros();
                     break;
                 case 4:
                     devolverCarro();
@@ -46,7 +47,9 @@ public class GerenciadorCarroDeAluguel {
 
  
     public static void retirarCarro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+                 
+         
     }
 
     public static void devolverCarro() {

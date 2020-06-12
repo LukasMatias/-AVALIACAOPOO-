@@ -79,6 +79,31 @@ public class Operacao {
         }
     }
 
+ 
+
+    public void listarCarros() {
+        Scanner input = new Scanner(System.in);
+           for (Carro car : carros) {
+            System.out.println(car);
+        }
+        if (c.isDisponibilidade()) {
+            System.out.println("Digite o nome do carro que deseja alugar: ");
+            String nome = input.next();
+            if (nome.contains(c.getMarca())) {
+                c.setDisponibilidade(false);
+                carros.remove(c);
+                System.out.println("\tVeiculo " + c.getMarca() + " esta alugado!");
+                System.out.println("\t Data e Hora do aluguel:" + getDateTime());
+                disponibilidade();
+                bd.removeCarro(c);
+            } else {
+                System.out.println("O Carro '" + c.getMarca().toUpperCase() + "' não esta disponivel ou não existe.");
+            }
+        } else{
+            System.out.println("Não há veiculos disponiveis");
+        }
+    }
+
     public String getTipoOperacao() {
         return tipoOperacao;
     }
