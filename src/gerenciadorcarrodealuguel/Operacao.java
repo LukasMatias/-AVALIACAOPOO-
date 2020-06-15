@@ -14,6 +14,7 @@ public class Operacao {
     double valor;
     BancoDeDados bd = new BancoDeDados();
     Carro c = new Carro();
+    Scanner input = new Scanner(System.in);
 
     @Override
     public String toString() {
@@ -23,7 +24,6 @@ public class Operacao {
     public void cadastrar() {
         setTipoOperacao("***COMPRA***");
         getTipoOperacao();
-        Scanner input = new Scanner(System.in);
         System.out.print("Digite a marca: ");
         c.marca = input.nextLine();
         System.out.print("Digite o modelo: ");
@@ -61,7 +61,6 @@ public class Operacao {
     public void venda() {
         setTipoOperacao("***VENDA***");
         System.out.println(getTipoOperacao());
-        Scanner input = new Scanner(System.in);
         System.out.print("Digite a placa do veiculo: ");
         String placa = input.next();
         System.out.print("Digite o valor do veiculo: ");
@@ -79,11 +78,26 @@ public class Operacao {
         }
     }
 
- 
+    void devolverCarro() {
+        setTipoOperacao("***DEVOLUÇÃO DE VEÍCULO***");
+        System.out.println(getTipoOperacao());
+        System.out.println("Informa a placa do veiculo: ");
+        String placa = input.next();
+        System.out.println("Status do tanque: ");
+        String tanque = input.next();
+        if (c.getPlaca().equals(placa)) {
+            bd.devolucao(c);
+            c.setDisponibilidade(true);
+            System.out.println("\tVeiculo " + c.getMarca() + " foi devolvido!");
+            System.out.println("\t Data e Hora da devolução:" + getDateTime());
+            disponibilidade();
+        } else {
+            System.out.println("Carro não identificado!");
+        }
+    }
 
     public void listarCarros() {
-        Scanner input = new Scanner(System.in);
-           for (Carro car : carros) {
+        for (Carro car : carros) {
             System.out.println(car);
         }
         if (c.isDisponibilidade()) {
@@ -91,15 +105,14 @@ public class Operacao {
             String nome = input.next();
             if (nome.contains(c.getMarca())) {
                 c.setDisponibilidade(false);
-                carros.remove(c);
                 System.out.println("\tVeiculo " + c.getMarca() + " esta alugado!");
                 System.out.println("\t Data e Hora do aluguel:" + getDateTime());
                 disponibilidade();
-                bd.removeCarro(c);
+                bd.addAluguel(c);
             } else {
                 System.out.println("O Carro '" + c.getMarca().toUpperCase() + "' não esta disponivel ou não existe.");
             }
-        } else{
+        } else {
             System.out.println("Não há veiculos disponiveis");
         }
     }
@@ -119,5 +132,4 @@ public class Operacao {
     public void setValor(double valor) {
         this.valor = valor;
     }
-
 }

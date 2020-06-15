@@ -34,7 +34,7 @@ public class GerenciadorCarroDeAluguel {
                     op.listarCarros();
                     break;
                 case 4:
-                    devolverCarro();
+                    op.devolverCarro();
                     break;
                 case 5:
                     sair = true;

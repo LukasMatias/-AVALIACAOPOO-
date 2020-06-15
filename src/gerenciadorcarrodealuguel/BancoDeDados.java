@@ -26,6 +26,18 @@ public class BancoDeDados {
             listCarro.add(c);
         }
     }
+    
+    public void addAluguel(Carro c){
+        if(carros.contains(c)){
+            c.setDisponibilidade(false);
+        }
+    }
+    
+    public void devolucao(Carro c ){
+        if(carros.equals(c.getPlaca())){
+            c.setDisponibilidade(true);
+        }
+    }
 
     Carro findByCarro(String placa) {
         return carrosByPlaca.get(placa);
